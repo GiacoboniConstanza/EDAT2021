@@ -24,6 +24,7 @@ public class NodoAVL {
         this.elem = e;
         this.izquierdo = i;
         this.derecho = d;
+        this.altura = 0;
     }
 
     //getElem():TipoElemento
@@ -42,6 +43,7 @@ public class NodoAVL {
     }
 
     //recalcularAltura()
+    
     //getIzquierdo():NodoAVL
     public NodoAVL getIzquierdo() {
         return this.izquierdo;

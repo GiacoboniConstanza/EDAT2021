@@ -48,6 +48,41 @@ public class ArbolAVL {
     }
 
     //insertar(TipoElemento):boolean (se modifica por el balanceo)
+    
+    //rotacion simple a izquierda sobre pivote r
+    private NodoAVL simpleIzquierda(NodoAVL r){
+        NodoAVL h = r.getDerecho();
+        NodoAVL aux = h.getIzquierdo();
+        h.setIzquierdo(r);
+        r.setDerecho(aux);
+        return h;
+    }
+    
+    //rotacion simple a derecha con pivote r
+    private NodoAVL simpleDerecha(NodoAVL r){
+        NodoAVL h = r.getIzquierdo();
+        NodoAVL aux = h.getDerecho();
+        h.setDerecho(r);
+        r.setIzquierdo(aux);
+        return h;
+    }
+    
+    //rotacion doble derecha-izquierda
+    private NodoAVL dobleDerIzq(NodoAVL r){
+        NodoAVL h;
+        r.setDerecho(simpleDerecha(r.getDerecho()));
+        h = simpleIzquierda(r);
+        return h;
+    }
+    
+    //rotacion doble izquierda-derecha
+    private NodoAVL dobleIzqDer(NodoAVL r){
+        NodoAVL h;
+        r.setIzquierdo(simpleIzquierda(r.getIzquierdo()));
+        h = simpleDerecha(r);
+        return h;
+    }
+    
     //eliminar(TipoElemento):boolean (se modifica por el balanceo)
     //listar():Lista
     public Lista listar() {
