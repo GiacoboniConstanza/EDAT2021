@@ -43,7 +43,19 @@ public class NodoAVL {
     }
 
     //recalcularAltura()
-    
+    public void recalcularAltura(){
+        if(this.izquierdo != null && this.derecho != null){
+            this.altura = (Math.max(this.izquierdo.altura, this.derecho.altura)) + 1;
+        } else {
+            if(this.derecho == null){
+                this.altura = (Math.max(this.izquierdo.altura, -1)) + 1;
+            } else {
+                if(this.izquierdo == null){
+                    this.altura = (Math.max(-1, this.derecho.altura)) + 1;
+                }
+            }
+        }
+    }
     //getIzquierdo():NodoAVL
     public NodoAVL getIzquierdo() {
         return this.izquierdo;

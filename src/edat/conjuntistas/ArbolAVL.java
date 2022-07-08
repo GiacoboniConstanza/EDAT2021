@@ -55,6 +55,7 @@ public class ArbolAVL {
         NodoAVL aux = h.getIzquierdo();
         h.setIzquierdo(r);
         r.setDerecho(aux);
+        h.recalcularAltura();
         return h;
     }
     
@@ -64,6 +65,7 @@ public class ArbolAVL {
         NodoAVL aux = h.getDerecho();
         h.setDerecho(r);
         r.setIzquierdo(aux);
+        h.recalcularAltura();
         return h;
     }
     
