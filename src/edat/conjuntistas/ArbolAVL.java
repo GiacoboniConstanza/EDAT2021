@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package edat.conjuntistas;
+
 import edat.lineales.dinamicas.Lista;
+
 /**
  *
  * @author Coqui
@@ -48,9 +50,70 @@ public class ArbolAVL {
     }
 
     //insertar(TipoElemento):boolean (se modifica por el balanceo)
-    
+    public boolean insertar(Comparable e) {
+        boolean exito = true;
+        if (this.raiz == null) {
+            this.raiz = new NodoAVL(e, null, null);
+        } else {
+            exito = insertarAux(this.raiz, e);
+            chequearBalanceo(this.raiz, null);
+            this.raiz.recalcularAltura();
+        }
+        return exito;
+    }
+
+    private boolean insertarAux(NodoAVL n, Comparable e) {
+        boolean exito = true;
+        if (e.compareTo(n.getElem()) == 0) {
+            exito = false;
+        } else {
+            if (e.compareTo(n.getElem()) < 0) {
+                if (n.getIzquierdo() != null) {
+                    exito = insertarAux(n.getIzquierdo(), e);
+                    chequearBalanceo(n.getIzquierdo(), n);
+                } else {
+                    n.setIzquierdo(new NodoAVL(e, null, null));
+                }
+                n.recalcularAltura();
+            } else {
+                if (n.getDerecho() != null) {
+                    exito = insertarAux(n.getDerecho(), e);
+                    chequearBalanceo(n.getDerecho(), n);
+                } else {
+                    n.setDerecho(new NodoAVL(e, null, null));
+                }
+                n.recalcularAltura();
+            }
+        }
+        return exito;
+    }
+
+    private void chequearBalanceo(NodoAVL n, NodoAVL p) {
+        int balance = 0;
+
+        if (n.getElem() != null) {
+            if (n.getIzquierdo() != null && n.getClass() != null) {
+                balance = n.getIzquierdo().getAltura() - n.getDerecho().getAltura();
+            } else {
+                if(n.getIzquierdo() != null){
+                    balance = n.getIzquierdo().getAltura() - (-1);
+                } else {
+                    balance = -1 - n.getDerecho().getAltura();
+                }
+            }
+            
+            if (balance == 2 || balance == -2) {
+                balancear(n, p, balance);
+            }
+        }
+    }
+
+    private void balancear(NodoAVL n, NodoAVL p, int balanceP) {
+
+    }
+
     //rotacion simple a izquierda sobre pivote r
-    private NodoAVL simpleIzquierda(NodoAVL r){
+    private NodoAVL simpleIzquierda(NodoAVL r) {
         NodoAVL h = r.getDerecho();
         NodoAVL aux = h.getIzquierdo();
         h.setIzquierdo(r);
@@ -58,9 +121,9 @@ public class ArbolAVL {
         h.recalcularAltura();
         return h;
     }
-    
+
     //rotacion simple a derecha con pivote r
-    private NodoAVL simpleDerecha(NodoAVL r){
+    private NodoAVL simpleDerecha(NodoAVL r) {
         NodoAVL h = r.getIzquierdo();
         NodoAVL aux = h.getDerecho();
         h.setDerecho(r);
@@ -68,23 +131,23 @@ public class ArbolAVL {
         h.recalcularAltura();
         return h;
     }
-    
+
     //rotacion doble derecha-izquierda
-    private NodoAVL dobleDerIzq(NodoAVL r){
+    private NodoAVL dobleDerIzq(NodoAVL r) {
         NodoAVL h;
         r.setDerecho(simpleDerecha(r.getDerecho()));
         h = simpleIzquierda(r);
         return h;
     }
-    
+
     //rotacion doble izquierda-derecha
-    private NodoAVL dobleIzqDer(NodoAVL r){
+    private NodoAVL dobleIzqDer(NodoAVL r) {
         NodoAVL h;
         r.setIzquierdo(simpleIzquierda(r.getIzquierdo()));
         h = simpleDerecha(r);
         return h;
     }
-    
+
     //eliminar(TipoElemento):boolean (se modifica por el balanceo)
     //listar():Lista
     public Lista listar() {
@@ -215,4 +278,3 @@ public class ArbolAVL {
         return res;
     }
 }
-
