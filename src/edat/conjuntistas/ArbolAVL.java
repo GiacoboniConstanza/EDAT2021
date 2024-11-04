@@ -109,7 +109,54 @@ public class ArbolAVL {
     }
 
     private void balancear(NodoAVL n, NodoAVL p, int balanceP) {
-
+        NodoAVL nuevaRaiz;
+        
+        if (balanceP == 2) {
+            // Desbalance hacia la izquierda
+            int balanceHijo = 0;
+            if (n.getIzquierdo().getIzquierdo() != null) {
+                balanceHijo = n.getIzquierdo().getIzquierdo().getAltura();
+            }
+            if (n.getIzquierdo().getDerecho() != null) {
+                balanceHijo -= n.getIzquierdo().getDerecho().getAltura();
+            }
+            
+            if (balanceHijo >= 0) {
+                // Rotación simple derecha
+                nuevaRaiz = simpleDerecha(n);
+            } else {
+                // Rotación doble izquierda-derecha
+                nuevaRaiz = dobleIzqDer(n);
+            }
+        } else {
+            // Desbalance hacia la derecha (balanceP == -2)
+            int balanceHijo = 0;
+            if (n.getDerecho().getIzquierdo() != null) {
+                balanceHijo = n.getDerecho().getIzquierdo().getAltura();
+            }
+            if (n.getDerecho().getDerecho() != null) {
+                balanceHijo -= n.getDerecho().getDerecho().getAltura();
+            }
+            
+            if (balanceHijo <= 0) {
+                // Rotación simple izquierda
+                nuevaRaiz = simpleIzquierda(n);
+            } else {
+                // Rotación doble derecha-izquierda
+                nuevaRaiz = dobleDerIzq(n);
+            }
+        }
+        
+        // Actualizar referencias del padre
+        if (p == null) {
+            this.raiz = nuevaRaiz;
+        } else {
+            if (p.getIzquierdo() == n) {
+                p.setIzquierdo(nuevaRaiz);
+            } else {
+                p.setDerecho(nuevaRaiz);
+            }
+        }
     }
 
     //rotacion simple a izquierda sobre pivote r
