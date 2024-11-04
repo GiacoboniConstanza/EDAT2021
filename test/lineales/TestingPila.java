@@ -1,21 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package lineales;
 
 import edat.lineales.estaticas.Pila;
-/**
- *
- * @author Coqui
- */
+
 public class TestingPila {
     static String sOk = "OK!", sErr = "ERROR";
 
     public static void main(String[] arg) {
         testPila();
-}
-     public static void testPila() {
+    }
+
+    public static void testPila() {
 
         System.out.println("COMIENZO TEST PILA");
         Pila p1 = new Pila();

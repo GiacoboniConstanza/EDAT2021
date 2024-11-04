@@ -1,15 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edat.jerarquicas.dinamicas;
 
 import edat.lineales.dinamicas.Lista;
 import edat.lineales.dinamicas.Cola;
-/**
- *
- * @author Coqui
- */
+
 public class ArbolGen {
 
     //raiz: NodoArbolGen
